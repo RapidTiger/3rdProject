@@ -33,8 +33,8 @@ public class HomeAct {
 	public String openBoardWrite(Model model) {
 		Map<String, Object> members = homeService.member();
 		model.addAttribute("members", members);
-		System.out.println("");
-		System.out.println(members!);
+		System.out.println(" ");
+		System.out.println(members);
 		return "/main/members";
 	}
 }
