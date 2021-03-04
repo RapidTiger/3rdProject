@@ -1,0 +1,210 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Watch shop | eCommers</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <!-- CSS here -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="assets/css/flaticon.css">
+        <link rel="stylesheet" href="assets/css/slicknav.css">
+        <link rel="stylesheet" href="assets/css/animate.min.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="assets/css/themify-icons.css">
+        <link rel="stylesheet" href="assets/css/slick.css">
+        <link rel="stylesheet" href="assets/css/nice-select.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+    <style type="text/css">
+        div{ -ms-overflow-style: none;} ::-webkit-scrollbar { display: none;}
+        .image{height: 35px; width: 35px; border-radius: 50%}
+        .message1{background-color: lightblue; margin: 5px 5px 0px 5px; padding: 5px 10px 5px 10px; float: left; max-width: 70%; border-radius: 7px; max-width: 300px}
+        .message2{background-color: #f1f1b8; margin: 5px 5px 0px 5px; padding: 5px 10px 5px 10px; float: right; max-width: 70%; border-radius: 7px; max-width: 300px}
+        .date{font-size: 13px; padding: 0px 5px 0px 5px}
+        .user{clear: right}
+        .friend{clear: left}
+        a { text-decoration:none }
+        a:visited { color: black; text-decoration: none;}
+        body{background-color: var(--light-pink);}
+    </style>
+</head>
+
+<body>
+<input type="checkbox" id="menuBtn">
+<div class="new-menu">
+    <label for="menuBtn" class="labelBtn" onclick="">
+        <img class="closed" src="img/temp/close.png" alt="">
+    </label>
+    <div id="new-menu-bar">
+        <ul id="navigation">
+            <li th:if='${id == null}'><a href="login">로그인</a></li>
+            <li th:if='${id == null}'><a href="join">회원가입</a></li>
+            <li th:if='${id != null}'><a href="member-list">회원보기</a></li>
+            <li th:if='${id != null}'><a href="AI-manager-1">AI 매니저</a></li>
+            <li th:if='${id != null}'><a href="messageHead">메시지</a></li>
+            <li th:if='${id != null}'><a href="markList">찜목록</a></li>
+            <li th:if='${id != null}'><a href="myProfile">내프로필</a></li>
+            <li th:if='${id != null}'><a href="logout">로그아웃</a></li>
+        </ul>
+    </div>
+</div>
+<!--? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/logo/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area" style="width: 100%">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="menu-wrapper">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
+                    </div>
+                    <label for="menuBtn" class="labelBtn" onclick="">
+                        <img class="menu_btn" src="img/temp/menu.png" alt="">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </div>
+</header>
+    <main>
+        <!-- Hero Area Start-->
+        <div class="slider-area ">
+            <div id="talk" style="overflow-y:scroll; overflow-x: hidden; width: 100%; height: 800px; padding: 20px">
+                <table style="width: 100%">
+                    <tr th:each="message : ${messages}">
+                        <td align="right" th:if='${id == message.send}'>
+                            <div align="left" class="message2" th:text="${message.content}"></div>
+                            <div class="date user">
+                                <span th:if="${message.checkMessage == 'new'}">✉️</span>
+                                <span th:if="${message.checkMessage != 'new'}">💌</span>
+                                <span th:text="${#strings.substring(message.mdate,5,16)}"></span>
+                            </div>
+                        </td>
+
+                        <td th:if='${id != message.send}'>
+                            <span><img class="image" th:src="@{|/img/user/${message.send}/1.png|}" onerror="this.src='/img/temp/user.png'"></span>
+                            <span class=send>
+                                <span th:text="${message.send}"></span><br>
+                            </span>
+                            <div>
+                                <div class="message1" th:text="${message.content}"></div>
+                            </div>
+                            <div class="date friend" th:text="${#strings.substring(message.mdate,5,16)}"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <table width=98% style="margin: 20px">
+                <tr>
+                    <td align="center">
+                        <input type=text class="form-control" name=content id=content onkeydown="enter()">
+                    </td>
+                    <td align="center">
+                        <button class="btn hero-btn" onclick="insert()" style='padding: 19px'>전송</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- Hero Area End-->
+        <!-- Latest Products Start -->
+    </main>
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scroll up, nice-select, sticky -->
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+    
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script>
+        $("#talk").scrollTop($("#talk")[0].scrollHeight);
+        var scroll_end = $("#talk").scrollTop();
+        /*<![CDATA[*/
+        var send = '[[${id}]]';
+        var received = '[[${friend}]]';
+        /*]]>*/
+        function insert(){
+            var content=document.getElementById('content').value;
+            if (content != ""){
+                $.ajax({
+                    url:"messageInsert",
+                    type:"POST",
+                    data:{
+                        send:send,
+                        received:received,
+                        content:content
+                    },
+                    success:function(res){
+                        document.getElementById('content').value = "";
+                    },
+                    error:function(){
+                        alert("error")
+                    }
+                })
+            }
+        }
+
+        function enter(){
+            if(event.keyCode == 13){
+                insert();
+            }
+        }
+
+        function autoRefresh_div(){
+            $('#talk').load('messageContentSet?friend='+received);
+            if (scroll_end <= $("#talk").scrollTop()){
+                scroll_end = $("#talk").scrollTop();
+                $("#talk").scrollTop($("#talk")[0].scrollHeight);
+            }
+        }
+        setInterval(autoRefresh_div,100)
+    </script>
+</body>
+</html>

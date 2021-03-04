@@ -1,0 +1,312 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Watch shop | eCommers</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="manifest" href="site.webmanifest">
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+	<!-- CSS here -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="assets/css/flaticon.css">
+	<link rel="stylesheet" href="assets/css/slicknav.css">
+	<link rel="stylesheet" href="assets/css/animate.min.css">
+	<link rel="stylesheet" href="assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="assets/css/themify-icons.css">
+	<link rel="stylesheet" href="assets/css/slick.css">
+	<link rel="stylesheet" href="assets/css/nice-select.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<input type="checkbox" id="menuBtn">
+<div class="new-menu">
+	<label for="menuBtn" class="labelBtn" onclick="">
+		<img class="closed" src="img/temp/close.png" alt="">
+	</label>
+	<div id="new-menu-bar">
+		<ul id="navigation">
+			<li th:if='${id == null}'><a href="login">로그인</a></li>
+			<li th:if='${id == null}'><a href="join">회원가입</a></li>
+			<li th:if='${id != null}'><a href="member-list">회원보기</a></li>
+			<li th:if='${id != null}'><a href="AI-manager-1">AI 매니저</a></li>
+			<li th:if='${id != null}'><a href="messageHead">메시지</a></li>
+			<li th:if='${id != null}'><a href="markList">찜목록</a></li>
+			<li th:if='${id != null}'><a href="myProfile">내프로필</a></li>
+			<li th:if='${id != null}'><a href="logout">로그아웃</a></li>
+		</ul>
+	</div>
+</div>
+<!--? Preloader Start -->
+<div id="preloader-active">
+	<div class="preloader d-flex align-items-center justify-content-center">
+		<div class="preloader-inner position-relative">
+			<div class="preloader-circle"></div>
+			<div class="preloader-img pere-text">
+				<img src="assets/img/logo/logo.png" alt="">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Preloader Start -->
+<header>
+	<!-- Header Start -->
+	<div class="header-area" style="width: 100%">
+		<div class="main-header header-sticky">
+			<div class="container-fluid">
+				<div class="menu-wrapper">
+					<!-- Logo -->
+					<div class="logo">
+						<a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
+					</div>
+					<label for="menuBtn" class="labelBtn" onclick="">
+						<img class="menu_btn" src="img/temp/menu.png" alt="">
+					</label>
+				</div>
+			</div>
+		</div>
+		<!-- Header End -->
+	</div>
+</header>
+	<main>
+
+		<!-- Start Align Area -->
+		<div class="whole-wrap">
+			<div class="container box_1170">
+				<div class="section-top-border">
+					<div class="row">
+						
+						<div class="col-lg-3 col-md-4 mt-sm-30">
+							<!-- Title -->
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="section-tittle mb-70 text-center">
+										<h2>AI 매니저</h2>
+									</div>
+								</div>
+							</div>
+							<div class="single-element-widget mt-30">
+								<form>
+									<h3 class="mb-30">원하는 조건을 설정하세요</h3>
+									<!-- 음주 -->
+									<div class="switch-wrap ">
+										<p class="width-30-per">01. 음주여부</p>
+										<div class="radiobox">
+											<ul class="input-flex">
+												<li><input class="mr-10" type="radio" name="drink" value="상관없음"><span>상관없음</span></li>
+												<li><input class="mr-10" type="radio" name="drink" value="음주"><span>좋아요</span></li>
+												<li><input class="mr-10" type="radio" name="drink" value="금주"><span>싫어요</span></li>
+											</ul>
+										</div>
+									</div>
+									<!-- 음주 -->
+									<div class="switch-wrap ">
+										<p class="width-30-per">02. 흡연여부</p>
+										<div class="radiobox">
+											<ul class="input-flex">
+												<li><input class="mr-10" type="radio" name="smoke" value="상관없음"><span>상관없음</span></li>
+												<li><input class="mr-10" type="radio" name="smoke" value="흡연"><span>좋아요</span></li>
+												<li><input class="mr-10" type="radio" name="smoke" value="금연"><span>싫어요</span></li>
+											</ul>
+										</div>
+									</div>
+									<!-- 음주 -->
+									<div class="switch-wrap ">
+										<p class="width-30-per">03. 결혼여부</p>
+										<div class="radiobox">
+											<ul class="input-flex">
+												<li><input class="mr-10" type="radio" name="married" value="상관없음"><span>상관없음</span></li>
+												<li><input class="mr-10" type="radio" name="married" value="초혼"><span>초혼</span></li>
+												<li><input class="mr-10" type="radio" name="married" value="재혼"><span>재혼</span></li>
+											</ul>
+										</div>
+									</div>
+									<!-- 종교 -->
+									<div class="switch-wrap input-flex">
+										<p class="width-40-per">04. 종교유무</p>
+										<div class="col-md-12 form-group p_star">
+											<select class="country_select education" id="religion" style="display: none;">
+												<option name="religion" value="상관없음">상관없음</option>
+												<option name="religion" value="기독교">기독교</option>
+												<option name="religion" value="천주교">천주교</option>
+												<option name="religion" value="불교">불교</option>
+												<option name="religion" value="원불교">원불교</option>
+												<option name="religion" value="유교">유교</option>
+												<option name="religion" value="도교">도교</option>
+												<option name="religion" value="이슬람교">이슬람교</option>
+												<option name="religion" value="힌두교">힌두교</option>
+												<option name="religion" value="무교">무교</option>
+											</select>
+										</div>
+									</div>
+									<!-- 종교 -->
+									<div class="switch-wrap input-flex">
+										<p class="w-90-per">05. 나이</p>
+										<div class="col-md-6 form-group p_star input-flex">
+											<input type="text" class="form-control" name="min" placeholder="최소"/>
+										</div>
+										<!-- 몸무게 -->
+										<div class="col-md-6 form-group p_star input-flex">
+											<input type="text" class="form-control" name="max" placeholder="최대"/>
+
+										</div>
+									</div>
+										<button type="button" onclick="ary()" class="btn_3">
+											AI 매니저 시작하기
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Align Area -->
+	</main>
+	<footer>
+		<!-- Footer Start-->
+		<div class="footer-area footer-padding">
+			<div class="container">
+				<!-- Footer bottom -->
+				<div class="row align-items-center">
+					<div class="col-xl-7 col-lg-8 col-md-7">
+						<div class="footer-copy-right">
+							<p>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;
+								<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+								template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+									href="https://colorlib.com" target="_blank">Marry Me</a>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</p>
+						</div>
+					</div>
+					<div class="col-xl-5 col-lg-4 col-md-5">
+						<div class="footer-copy-right f-right">
+							<!-- social -->
+							<div class="footer-social">
+								<a href="#"><i class="fab fa-twitter"></i></a>
+								<a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+								<a href="#"><i class="fab fa-behance"></i></a>
+								<a href="#"><i class="fas fa-globe"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer End-->
+	</footer>
+	<!--? Search model Begin -->
+	<div class="search-model-box">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-btn">+</div>
+			<form class="search-model-form">
+				<input type="text" id="search-input" placeholder="Searching key.....">
+			</form>
+		</div>
+	</div>
+	<!-- Search model end -->
+
+	<!-- JS here -->
+
+	<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+	<!-- Jquery, Popper, Bootstrap -->
+	<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+	<script src="./assets/js/popper.min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+	<!-- Jquery Mobile Menu -->
+	<script src="./assets/js/jquery.slicknav.min.js"></script>
+
+	<!-- Jquery Slick , Owl-Carousel Plugins -->
+	<script src="./assets/js/owl.carousel.min.js"></script>
+	<script src="./assets/js/slick.min.js"></script>
+
+	<!-- One Page, Animated-HeadLin -->
+	<script src="./assets/js/wow.min.js"></script>
+	<script src="./assets/js/animated.headline.js"></script>
+
+	<!-- Scroll up, nice-select, sticky -->
+	<script src="./assets/js/jquery.scrollUp.min.js"></script>
+	<script src="./assets/js/jquery.nice-select.min.js"></script>
+	<script src="./assets/js/jquery.sticky.js"></script>
+	<script src="./assets/js/jquery.magnific-popup.js"></script>
+
+	<!-- contact js -->
+	<script src="./assets/js/contact.js"></script>
+	<script src="./assets/js/jquery.form.js"></script>
+	<script src="./assets/js/jquery.validate.min.js"></script>
+	<script src="./assets/js/mail-script.js"></script>
+	<script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+	<!-- Jquery Plugins, main Jquery -->
+	<script src="./assets/js/plugins.js"></script>
+	<script src="./assets/js/main.js"></script>
+	<script>
+		/*<![CDATA[*/
+		var id = '[[${id}]]';
+		/*]]>*/
+
+		function ary() {
+			var drink = null;
+			var smoke = null;
+			var married = null;
+			var check_count = document.getElementsByName("drink").length;
+			for (var i=0; i<check_count; i++) {
+				if (document.getElementsByName("drink")[i].checked == true) {
+					drink = document.getElementsByName("drink")[i].value;
+				}
+			}
+			check_count = document.getElementsByName("smoke").length;
+			for (var i=0; i<check_count; i++) {
+				if (document.getElementsByName("smoke")[i].checked == true) {
+					smoke = document.getElementsByName("smoke")[i].value;
+				}
+			}
+			check_count = document.getElementsByName("married").length;
+			for (var i=0; i<check_count; i++) {
+				if (document.getElementsByName("married")[i].checked == true) {
+					married = document.getElementsByName("married")[i].value;
+				}
+			}
+			var tb = document.getElementById("religion");
+			var tbIndex = document.getElementById("religion").options.selectedIndex;
+			var religion = tb.options[tbIndex].value;
+			var min = document.getElementsByName("min")[0].value;
+			var max = document.getElementsByName("max")[0].value;
+			console.log(drink);
+			console.log(smoke);
+			console.log(married);
+			console.log(religion);
+			console.log(min);
+			console.log(max);
+			location.href="AI-manager-2";
+			// $.ajax({
+			// 	url:"http://localhost:9000/ary",
+			// 	type:"POST",
+			// 	data:{
+			// 		user_id:id,
+			// 		drink:drink,
+			// 		smoke:smoke,
+			// 		birth_low:min,
+			// 		birth_high:max,
+			// 		religion:religion,
+			// 		marry_state:married,
+			// 		gender:"여성"
+			// 	},
+			// 	success:function(res){
+			// 		console.log(res);
+			// 	},
+			// 	error:function(){
+			// 		alert("error")
+			// 	}
+			// })
+		}
+	</script>
+</body>
+
+</html>

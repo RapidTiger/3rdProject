@@ -1,0 +1,420 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Watch shop | eCommers</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+<body>
+<!--? Preloader Start -->
+<input type="checkbox" id="menuBtn">
+<div class="new-menu">
+    <label for="menuBtn" class="labelBtn" onclick="">
+        <img class="closed" src="img/temp/close.png" alt="">
+    </label>
+    <div id="new-menu-bar">
+        <ul id="navigation">
+            <li th:if='${id == null}'><a href="login">로그인</a></li>
+            <li th:if='${id == null}'><a href="join">회원가입</a></li>
+            <li th:if='${id != null}'><a href="member-list">회원보기</a></li>
+            <li th:if='${id != null}'><a href="AI-manager-1">AI 매니저</a></li>
+            <li th:if='${id != null}'><a href="messageHead">메시지</a></li>
+            <li th:if='${id != null}'><a href="markList">찜목록</a></li>
+            <li th:if='${id != null}'><a href="myProfile">내프로필</a></li>
+            <li th:if='${id != null}'><a href="logout">로그아웃</a></li>
+        </ul>
+    </div>
+</div>
+<!--? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/logo/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area" style="width: 100%">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="menu-wrapper">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
+                    </div>
+                    <label for="menuBtn" class="labelBtn" onclick="">
+                        <img class="menu_btn" src="img/temp/menu.png" alt="">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </div>
+</header>
+<main>
+    <!--? slider Area Start -->
+    <div class="slider-area ">
+        <div class="slider-active">
+            <!-- Single Slider -->
+            <div>
+                <!--                <div class="single-slider slider-height d-flex align-items-center slide-bg">-->
+                <div class="container" style="overflow-x: scroll">
+                    <div class="row justify-content-between align-items-center">
+                        <img class="userimage" th:src="@{|/img/user/${profile.id}/1.png|}" onerror="this.src='/img/temp/user.png'">
+                        <img class="userimage" th:src="@{|/img/user/${profile.id}/2.png|}" onerror="this.src='/img/temp/user.png'">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+    <!-- About Details Start -->
+    <div class="about-details section-padding30">
+        <div class="container">
+            <!-- Profile Start -->
+
+            <div class="row">
+
+                <div class="offset-xl-1 col-lg-8">
+                    <table>
+                        <tr>
+                            <td width="235px">
+                                <span id="mark" class="button rounded-0 primary-bg text-white 100 btn_1 boxed-btn" style="width: 100%">
+                                    <a onclick="mark_insert()" th:if="${mark == null}">찜하기 🤍</a>
+                                    <a onclick="mark_delete()" th:if="${mark != null}">찜하기 💗</a>
+                                </span>
+                            </td>
+                            <td width="235px">
+                                <a style="width: 100%" class="button rounded-0 primary-bg text-white 100 btn_1 boxed-btn" th:href="@{messageContent(friend=${profile.id})}">메시지보내기</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <br>
+                    <!-- 자기소개 -->
+                    <div class="about-details-cap mb-50">
+                        <h4>자기소개</h4>
+                        <div id="introduce" class="introduce padding-t-l-r-5" th:text="${profile.introduce}">
+                            자기소개text
+                        </div>
+                    </div>
+
+                    <!-- 기본 정보 -->
+                    <div class="about-details-cap mb-50">
+                        <h4>기본 정보</h4>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">성별</div>
+                                    <div th:text="${profile.gender}">남성</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">대화명</div>
+                                    <div th:text="${profile.nickname}">닉네임</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">나이</div>
+                                    <div th:text="${profile.birth}+'세'">25</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">거주지</div>
+                                    <div th:text="${profile.address}">지역</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">성혼유형</div>
+                                    <div th:text="${profile.marryState}">초혼</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">혈액형</div>
+                                    <div th:text="${profile.blood}">A형</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">종교</div>
+                                    <div th:text="${profile.religion}">무교</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">학력</div>
+                                    <div th:text="${profile.education}">초,중졸</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">직업</div>
+                                    <div th:text="${profile.job}">무직</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">연봉</div>
+                                    <div th:text="${profile.salary}">2천만원 미만</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">재산</div>
+                                    <div th:text="${profile.property}">2천만원 미만</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">차량</div>
+                                    <div th:text="${profile.car}">없음</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 스타일 -->
+                    <div class="about-details-cap mb-50">
+                        <h4>외모 / 성향</h4>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">키</div>
+                                    <div class="input-flex">
+                                        <div th:text="${profile.height}">170</div>
+                                        <div>cm</div>
+                                    </div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">몸무게</div>
+                                    <div class="input-flex">
+                                        <div th:text="${profile.weight}">70</div>
+                                        <div>Kg</div>
+                                    </div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">스타일</div>
+                                    <div th:text="${profile.style}">평범함,귀여움,섹시함</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">성향</div>
+                                    <div th:text="${profile.chars}">조용함, 터프함, 유머러스</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">취미</div>
+                                    <div th:text="${profile.hobby}">음주, 맛집탐방, 요리</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">음식취향</div>
+                                    <div th:text="${profile.favorFood}">초밥, 라면, 삼겹살</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">음주</div>
+                                    <div th:text="${profile.drink}">음주 안함</div>
+                                </li>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">흡연</div>
+                                    <div th:text="${profile.smoke}">경험없음</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 가족관계 -->
+                    <div class="about-details-cap mb-50">
+                        <h4>가족관계</h4>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">부모님</div>
+                                    <div th:text="${profile.parents}">두분 모두 계심</div>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">형제</div>
+                                    <div class="input-flex">
+                                        <div th:text="${profile.brother}">1</div>
+                                        <div>명</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-30-per">자매</div>
+                                    <div class="input-flex">
+                                        <div th:text="${profile.sister}">1</div>
+                                        <div>명</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 결혼계획  -->
+                    <div class="about-details-cap mb-50">
+                        <h4>결혼계획</h4>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-65-per">배우자로서 나의 점수</div>
+                                    <div th:text="${profile.myScore}">80</div>
+                                    <div>점</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-65-per">결혼까지 필요한 교제기간</div>
+                                    <div th:text="${profile.plan}">기간 상관없음</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="input-flex margin-bottom-10 border-bottom padding-t-l-r-5">
+                                    <div class="width-65-per">결혼 후 자녀계획</div>
+                                    <div th:text="${profile.childBirth}">배우자와 결정</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Details End -->
+</main>
+<footer>
+    <!-- Footer Start-->
+    <div class="footer-area footer-padding">
+        <div class="container">
+            <!-- Footer bottom -->
+            <div class="row align-items-center">
+                <div class="col-xl-7 col-lg-8 col-md-7">
+                    <div class="footer-copy-right">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Marry Me</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-4 col-md-5">
+                    <div class="footer-copy-right f-right">
+                        <!-- social -->
+                        <div class="footer-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+</footer>
+<!--? Search model Begin -->
+<div class="search-model-box">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-btn">+</div>
+    </div>
+</div>
+
+<!-- Search model end -->
+
+<!-- JS here -->
+
+<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="./assets/js/popper.min.js"></script>
+<script src="./assets/js/bootstrap.min.js"></script>
+<!-- Jquery Mobile Menu -->
+<script src="./assets/js/jquery.slicknav.min.js"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="./assets/js/owl.carousel.min.js"></script>
+<script src="./assets/js/slick.min.js"></script>
+
+<!-- One Page, Animated-HeadLin -->
+<script src="./assets/js/wow.min.js"></script>
+<script src="./assets/js/animated.headline.js"></script>
+<script src="./assets/js/jquery.magnific-popup.js"></script>
+
+<!-- Scrollup, nice-select, sticky -->
+<script src="./assets/js/jquery.scrollUp.min.js"></script>
+<script src="./assets/js/jquery.nice-select.min.js"></script>
+<script src="./assets/js/jquery.sticky.js"></script>
+
+<!-- contact js -->
+<script src="./assets/js/contact.js"></script>
+<script src="./assets/js/jquery.form.js"></script>
+<script src="./assets/js/jquery.validate.min.js"></script>
+<script src="./assets/js/mail-script.js"></script>
+<script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="./assets/js/plugins.js"></script>
+<script src="./assets/js/main.js"></script>
+
+<script type="text/javascript">
+
+    /*<![CDATA[*/
+    var mark = '[[${profile.id}]]';
+    var name = '[[${profile.nickname}]]'
+    /*]]>*/
+
+    function mark_insert(){
+        console.log(mark + name);
+        $.ajax({
+            url:"markInsert",
+            type:"POST",
+            data:{
+                mark:mark,
+                markName:name
+            },
+            success:function(res){
+                console.log(res)
+                $("#mark").html("<a onclick='mark_delete()'>찜하기 💗</a>");
+            },
+            error:function(){
+                alert("error")
+            }
+        })
+    }
+
+    function mark_delete(){
+        $.ajax({
+            url:"markDelete",
+            type:"POST",
+            data:{
+                mark:mark
+            },
+            success:function(res){
+                console.log(res)
+                $("#mark").html("<a onclick='mark_insert()'>찜하기 🤍</a>");
+            },
+            error:function(){
+                alert("error")
+            }
+        })
+    }
+</script>
+
+
+</body>
+</html>

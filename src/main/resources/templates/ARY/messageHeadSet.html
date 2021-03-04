@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="head">
+    <table>
+        <tr th:each="head : ${heads}">
+            <td style="padding: 10px 0px 10px 0px" th:if='${id == head.send}'>
+                <div class="imgBox"><img class="image" th:src="@{|/img/user/${head.received}/1.png|}" onerror="this.src='/img/temp/user.png'"></div>
+            </td>
+            <td th:if='${id == head.send}'>
+                <a class="content" th:href="${id != head.send}?@{messageContent(friend=${head.received})}:@{messageContent(friend=${head.received})}">
+                    <div>
+                        <span th:text="${head.received}"></span>
+                        <span th:text="${#strings.substring(head.mdate,5,16)}"></span>
+                        <span th:if='${head.checkMessage == "new" and head.send != id}'>✉️</span><br>
+                        <div style="width: 100%;display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; height: 2.4em; line-height: 1.2; white-space: normal;" class="content" th:text="${head.content}"></div><br>
+                    </div>
+                </a>
+            </td>
+
+            <td style="padding: 10px 0px 10px 0px" th:if='${id != head.send}'>
+                <div class="imgBox"><img class="image" th:src="@{|/img/user/${head.send}/1.png|}" onerror="this.src='/img/temp/user.png'"></div>
+            </td>
+            <td th:if='${id != head.send}'>
+                <a class="content" th:href="${id != head.send}?@{messageContent(friend=${head.send})}:@{messageContent(friend=${head.received})}">
+                    <div>
+                        <span th:text="${head.send}"></span>
+                        <span th:text="${#strings.substring(head.mdate,5,16)}"></span>
+                        <span th:if='${head.checkMessage == "new" and head.send != id}'>✉️</span><br>
+                        <div style="width: 100%;display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; height: 2.4em; line-height: 1.2; white-space: normal;" class="content" th:text="${head.content}"></div><br>
+                    </div>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

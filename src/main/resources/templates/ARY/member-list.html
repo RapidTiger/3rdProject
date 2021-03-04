@@ -1,0 +1,464 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title>Watch shop | eCommers</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="manifest" href="site.webmanifest">
+   <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+   <!-- CSS here -->
+   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+   <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+   <link rel="stylesheet" href="assets/css/flaticon.css">
+   <link rel="stylesheet" href="assets/css/slicknav.css">
+   <link rel="stylesheet" href="assets/css/animate.min.css">
+   <link rel="stylesheet" href="assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+   <link rel="stylesheet" href="assets/css/themify-icons.css">
+   <link rel="stylesheet" href="assets/css/slick.css">
+   <link rel="stylesheet" href="assets/css/nice-select.css">
+   <link rel="stylesheet" href="assets/css/style.css">
+
+   <!-- Icon -->
+   <script src="https://kit.fontawesome.com/396f2e87c6.js" crossorigin="anonymous"></script>
+
+   <style>
+      #ctgBtn{
+         visibility: hidden;
+      }
+
+      #ctg {
+         overflow-y: scroll;
+         position: fixed;
+         z-index: 0;
+         opacity: 0;
+         top : 50%;
+         left : 50%;
+         transform: translate(-50%, -50%);
+         height: 600px;
+         width: 400px;
+         padding-top: 20px;
+         background-color: pink;
+         transition-duration: 0.5s;
+         border-radius: 3%;
+      }
+      #ctgBtn:checked~#ctg{
+         z-index: 10000;
+         opacity: 1;
+         transition-duration: 0.5s;
+      }
+       .nice-select ul{overflow-y: scroll !important;}
+       .oversize ul{height: 200px}
+       .nice-select, .nice-select ul{width: 90%}
+
+   </style>
+</head>
+
+<body>
+<input type="checkbox" id="ctgBtn">
+<label for="ctgBtn">
+   <div id="divBtn">
+      <i class="fas fa-search"></i>
+   </div>
+</label>
+<div id="ctg">
+
+      <div >
+         <div class="row">
+            <div class="col-lg-8 mt-20 mb-20 ml-20 mr-20">
+               <form class="row contact_form" action="member-listCtg" method="post" novalidate="novalidate">
+                  <div class="col-md-12 form-group p_star input-flex overflow">
+<!--                     성별-->
+                     <div class="category"><span>성별</span></div>
+                     <select class="country_select" name="gender">
+                        <option value="">전부</option>
+                        <option value="남성">남성</option>
+                        <option value="여성">여성</option>
+                     </select>
+                  </div>
+                  <!-- 연봉 -->
+                  <div class="col-md-12 form-group p_star input-flex overflow">
+                     <div class="category"><span>연봉</span></div>
+                     <select class="country_select salary oversize" name="salary" style="display: none;">
+                        <option value="">전부</option>-->
+                        <option value="2천만원 미만">2천만원 미만</option>
+                        <option value="2천만원대">2천만원대</option>
+                        <option value="3천만원대">3천만원대</option>
+                        <option value="4천만원대">4천만원대</option>
+                        <option value="5천만원대">5천만원대</option>
+                        <option value="6천만원대">6천만원대</option>
+                        <option value="7천만원대">7천만원대</option>
+                        <option value="8천만원대">8천만원대</option>
+                        <option value="9천만원대">9천만원대</option>
+                        <option value="1억~3억 미만">1억~3억 미만</option>
+                        <option value="3억~5억 미만">3억~5억 미만</option>
+                        <option value="5억 이상">5억 이상</option>
+                     </select>
+                  </div>
+<!--                  나이-->
+                  <div class="col-md-12 form-group p_star input-flex overflow">
+                     <div class="category"><span>나이</span></div>
+                     <select class="country_select oversize" name="birth">
+                        <option value="">전부</option>
+                        <option value="20">20대</option>
+                        <option value="30">30대</option>
+                        <option value="40">40대</option>
+                        <option value="50">50대</option>
+                        <option value="60">60대</option>
+                        <option value="70">70대</option>
+                        <option value="80">80대</option>
+                     </select>
+                  </div>
+                  <!-- 거주지 -->
+                  <div class="col-md-12 form-group p_star input-flex overflow">
+                     <div class="category"><span>거주지</span></div>
+                     <select class="country_select residence oversize" name="address" style="display: none;">
+                        <option value="">전부</option>
+                        <option value="서울">서울</option>
+                        <option value="경기">경기</option>
+                        <option value="인천">인천</option>
+                        <option value="부산">부산</option>
+                        <option value="울산">울산</option>
+                        <option value="경남">경남</option>
+                        <option value="대구">대구</option>
+                        <option value="경북">경북</option>
+                        <option value="광주">광주</option>
+                        <option value="전남">전남</option>
+                        <option value="전북">전북</option>
+                        <option value="대전">대전</option>
+                        <option value="충남">충남</option>
+                        <option value="충북">충북</option>
+                        <option value="강원">강원</option>
+                        <option value="제주">제주</option>
+                        <option value="세종">세종</option>
+                     </select>
+                  </div>
+                  <!-- 혈액형 -->
+                  <div class="col-md-12 form-group p_star input-flex">
+                     <div class="category"><span>혈액형</span></div>
+                     <select class="country_select blood" name="blood" style="display: none;">
+                        <option value="">전부</option>
+                        <option value="A형">A형</option>
+                        <option value="B형">B형</option>
+                        <option value="AB형">AB형</option>
+                        <option value="O형">O형</option>
+                     </select>
+                  </div>
+                  <!-- 종교 -->
+                  <div class="col-md-12 form-group p_star input-flex overflow">
+                     <div class="category"><span>종교</span></div>
+                     <select class="country_select religion oversize" name="religion" style="display: none;">
+                        <option value="무교">무교</option>
+                        <option value="기독교">기독교</option>
+                        <option value="천주교">천주교</option>
+                        <option value="불교">불교</option>
+                        <option value="원불교">원불교</option>
+                        <option value="유교">유교</option>
+                        <option value="도교">도교</option>
+                        <option value="이슬람교">이슬람교</option>
+                        <option value="힌두교">힌두교</option>
+                        <option value="기타">기타</option>
+                     </select>
+                  </div>
+                  <!-- 학력-->
+                  <div class="col-md-12 form-group p_star input-flex">
+                     <div class="category"><span>학력</span></div>
+                     <select class="country_select education" name="education" style="display: none;">
+                        <option value="">전부</option>
+                        <option value="초,중졸">초,중졸</option>
+                        <option value="고졸">고졸</option>
+                        <option value="대학(2,3년)졸">대학(2,3년)졸</option>
+                        <option value="대학(4년)졸">대학(4년)졸</option>
+                        <option value="대학원졸">대학원졸</option>
+                     </select>
+                  </div>
+                  <!-- 성혼유형 -->
+                  <div class="col-md-12 form-group p_star input-flex">
+                     <div class="category"><span>성혼유형</span></div>
+                     <select class="country_select marriage" name="marryState" style="display: none;">
+                        <option value="">전부</option>
+                        <option value="초혼">초혼</option>
+                        <option value="재혼">재혼</option>
+                     </select>
+                  </div>
+                  <div class="col-md-12 form-group">
+                     <button type="submit" value="submit" class="btn_3">
+                        회원찾기
+                     </button>
+                  </div>
+               </form>
+            </div>
+         </div>
+
+
+      </div>
+</div>
+   <!-- Preloader Start -->
+<input type="checkbox" id="menuBtn">
+<div class="new-menu">
+   <label for="menuBtn" class="labelBtn" onclick="">
+      <img class="closed" src="img/temp/close.png" alt="">
+   </label>
+   <div id="new-menu-bar">
+      <ul id="navigation">
+         <li th:if='${id == null}'><a href="login">로그인</a></li>
+         <li th:if='${id == null}'><a href="join">회원가입</a></li>
+         <li th:if='${id != null}'><a href="member-list">회원보기</a></li>
+         <li th:if='${id != null}'><a href="AI-manager-1">AI 매니저</a></li>
+         <li th:if='${id != null}'><a href="messageHead">메시지</a></li>
+         <li th:if='${id != null}'><a href="markList">찜목록</a></li>
+         <li th:if='${id != null}'><a href="myProfile">내프로필</a></li>
+         <li th:if='${id != null}'><a href="logout">로그아웃</a></li>
+      </ul>
+   </div>
+</div>
+<!--? Preloader Start -->
+<div id="preloader-active">
+   <div class="preloader d-flex align-items-center justify-content-center">
+      <div class="preloader-inner position-relative">
+         <div class="preloader-circle"></div>
+         <div class="preloader-img pere-text">
+            <img src="assets/img/logo/logo.png" alt="">
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Preloader Start -->
+<header>
+   <!-- Header Start -->
+   <div class="header-area" style="width: 100%">
+      <div class="main-header header-sticky">
+         <div class="container-fluid">
+            <div class="menu-wrapper">
+               <!-- Logo -->
+               <div class="logo">
+                  <a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
+               </div>
+               <label for="menuBtn" class="labelBtn" onclick="">
+                  <img class="menu_btn" src="img/temp/menu.png" alt="">
+               </label>
+            </div>
+         </div>
+      </div>
+      <!-- Header End -->
+   </div>
+</header>
+   <main>
+      <!--================ Member List Area =================-->
+      <section class="blog_area single-post-area">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 posts-list" id="profileList">
+                  <div class="blog-author" th:each="list : ${lists}" th:onclick="@{'profile(\''+${list.id}+'\')'}" th:if="${list.id != null}">
+                     <div class="media align-items-center">
+                        <img class="image" th:src="@{|/img/user/${list.id}/1.png|}" onerror="this.src='/img/temp/user.png'">
+                        <div class="media-body">
+                           <ul class="media-item">
+                              <li th:text="${list.nickname}">메롱메롱</li>
+                              <li><a th:href="@{messageContent(friend=${list.id})}" onclick="noclick()">연락하기</a></li>
+                           </ul>
+                           <div class="blog-info-link">
+                              <ul>
+                                 <li th:text="${list.marryState}">초혼</li>
+                                 <li th:text="${list.gender}">여성</li>
+                                 <li th:text="${list.birth}+'세'">50세</li>
+                                 <li th:text="${list.address}">전남</li>
+                                 <li th:text="${list.chars}">다정다감한</li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="introduce box-grient-clamp margin-top-10"  th:text="${list.introduce}">
+                        이 글을 쓰면서도 글로써 저 자신을 전부 표현하기에는 한계가 있다고 생각을 합니다.
+                     </div>
+                  </div>
+                  <div class="blog-author" th:if="${lists[0].id == null}">
+                     해당하는 회원 정보가 없습니다.
+                  </div>
+                  <!-- Member List Contents End -->
+               </div>
+               <div class="col-lg-4">
+                  <div class="blog_right_sidebar">
+                     <aside class="single_sidebar_widget search_widget">
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" onclick="more()" th:if="${lists[0].id != null}">회원 더보기</button>
+                     </aside>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--================ Blog Area end =================-->
+   </main>
+   <footer>
+      <!-- Footer Start-->
+      <div class="footer-area footer-padding">
+         <div class="container">
+            <!-- Footer bottom -->
+            <div class="row align-items-center">
+               <div class="col-xl-7 col-lg-8 col-md-7">
+                  <div class="footer-copy-right">
+                     <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                           target="_blank">Marry Me</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                     </p>
+                  </div>
+               </div>
+               <div class="col-xl-5 col-lg-4 col-md-5">
+                  <div class="footer-copy-right f-right">
+                     <!-- social -->
+                     <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fas fa-globe"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Footer End-->
+   </footer>
+   <!--? Search model Begin -->
+   <div class="search-model-box">
+      <div class="h-100 d-flex align-items-center justify-content-center">
+         <div class="search-close-btn">+</div>
+         <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Searching key.....">
+         </form>
+      </div>
+   </div>
+   <!-- Search model end -->
+
+   <!-- JS here -->
+
+   <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+   <!-- Jquery, Popper, Bootstrap -->
+   <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+   <script src="./assets/js/popper.min.js"></script>
+   <script src="./assets/js/bootstrap.min.js"></script>
+   <!-- Jquery Mobile Menu -->
+   <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+   <!-- Jquery Slick , Owl-Carousel Plugins -->
+   <script src="./assets/js/owl.carousel.min.js"></script>
+   <script src="./assets/js/slick.min.js"></script>
+   <!-- Date Picker -->
+   <script src="./assets/js/gijgo.min.js"></script>
+   <!-- One Page, Animated-HeadLin -->
+   <script src="./assets/js/wow.min.js"></script>
+   <script src="./assets/js/animated.headline.js"></script>
+   <script src="./assets/js/jquery.magnific-popup.js"></script>
+
+   <!-- Scrollup, nice-select, sticky -->
+   <script src="./assets/js/jquery.scrollUp.min.js"></script>
+   <script src="./assets/js/jquery.nice-select.min.js"></script>
+   <script src="./assets/js/jquery.sticky.js"></script>
+
+   <!-- contact js -->
+   <script src="./assets/js/contact.js"></script>
+   <script src="./assets/js/jquery.form.js"></script>
+   <script src="./assets/js/jquery.validate.min.js"></script>
+   <script src="./assets/js/mail-script.js"></script>
+   <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+
+   <!-- Jquery Plugins, main Jquery -->
+   <script src="./assets/js/plugins.js"></script>
+   <script src="./assets/js/main.js"></script>
+   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script type="text/javascript">
+
+      var page = 1;
+      var profileList = document.getElementById('profileList')
+      /*<![CDATA[*/
+      var start = '[[${lists[0].num}]]';
+      var gender = '[[${ctg.gender}]]';
+      var birth = '[[${ctg.birth}]]';
+      var address = '[[${ctg.address}]]';
+      var blood = '[[${ctg.blood}]]';
+      var religion = '[[${ctg.religion}]]';
+      var education = '[[${ctg.education}]]';
+      var salary = '[[${ctg.salary}]]';
+      var marryState = '[[${ctg.marryState}]]';
+      /*]]>*/
+      var total = gender + birth + address;
+      var url = '';
+      if (total == '') {
+         url = "profileListSelectMore";
+      } else {
+         url = "profileListSelectCtgMore";
+      }
+      console.log(total);
+      function more(){
+         $.ajax({
+            url:url,
+            type:"GET",
+            data:{
+               gender:gender,
+               birth:birth,
+               marryState:marryState,
+               address:address,
+               blood:blood,
+               religion:religion,
+               education:education,
+               salary:salary,
+               more:page,
+               start:start
+            },
+            success:function(res){
+               console.log(res);
+               if(res.length == 0){
+                  document.getElementsByClassName("single_sidebar_widget")[0].innerHTML = "마지막 페이지입니다";
+               }
+               for(let i = 0; i < res.length; i++){
+                  profileList.innerHTML += '<div class="blog-author" onclick="profile(\''+res[i].id+'\')" id=1div'+page+'num'+i+'>'
+                  var div1 = document.getElementById("1div"+page+"num"+i);
+                  div1.innerHTML += '<div class="media align-items-center" id=2div'+page+'num'+i+'>'
+                  var div2 = document.getElementById("2div"+page+"num"+i);
+                  div2.innerHTML += '<img class=image src=/img/user/'+res[i].id+'/1.png onerror="this.src=\'/img/temp/user.png\'">'
+                  div2.innerHTML += '<div class="media-body" id=3div'+page+'num'+i+'>';
+                  var div3 = document.getElementById("3div"+page+"num"+i);
+                  div3.innerHTML += '<ul class="media-item" id=1ul'+page+'num'+i+'>';
+                  var ul1 = document.getElementById("1ul"+page+"num"+i);
+                  ul1.innerHTML += '<li>'+res[i].nickname+'</li>'
+                  ul1.innerHTML += '<li><a href="messageContent?friend='+res[i].id+'">연락하기</a></li>'
+                  div3.innerHTML += '<div class="blog-info-link" id=4div'+page+'num'+i+'>';
+                  var div4 = document.getElementById("4div"+page+"num"+i);
+                  div4.innerHTML += '<ul id=2ul'+page+'num'+i+'>';
+                  var ul2 = document.getElementById("2ul"+page+"num"+i);
+                  ul2.innerHTML += '<li>'+res[i].marryState+'</li>'
+                  ul2.innerHTML += '<li>'+res[i].gender+'</li>'
+                  ul2.innerHTML += '<li>'+res[i].birth+'세</li>'
+                  ul2.innerHTML += '<li>'+res[i].address+'</li>'
+                  ul2.innerHTML += '<li>'+res[i].chars+'</li>'
+                  div1.innerHTML += '<div class="introduce box-grient-clamp margin-top-10">'+res[i].introduce+'</div>'
+               }
+               page++;
+            },
+            error:function(){
+               alert("error")
+            }
+         })
+      }
+      function noclick(){
+         var event = window.event;
+         if(event.stopPropagation()){
+            event.stopPropagation();  // W3C 표준
+         }
+      }
+
+      function profile(id) {
+         window.open("/userProfile?user="+id);
+         // location.href="/userProfile?user="+id;
+      }
+   </script>
+</body>
+
+</html>

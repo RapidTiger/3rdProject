@@ -1,0 +1,389 @@
+<!doctype html>
+<html class="no-js" lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Watch shop | eCommers</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <!-- CSS here -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="assets/css/flaticon.css">
+        <link rel="stylesheet" href="assets/css/slicknav.css">
+        <link rel="stylesheet" href="assets/css/animate.min.css">
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="assets/css/themify-icons.css">
+        <link rel="stylesheet" href="assets/css/slick.css">
+        <link rel="stylesheet" href="assets/css/nice-select.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        #profileBtn{
+            visibility: hidden;
+        }
+
+        #profileSub {
+            overflow-y: scroll;
+            position: fixed;
+            z-index: 0;
+            opacity: 0;
+            top : 50%;
+            left : 50%;
+            transform: translate(-50%, -50%);
+            height: 140px;
+            width: 380px;
+            background-color: pink;
+            transition-duration: 0.5s;
+            border-radius: 3%;
+        }
+        #profileBtn:checked~#profileSub{
+            z-index: 10000;
+            opacity: 1;
+            transition-duration: 0.5s;
+        }
+        .label{width: 100%}
+    </style>
+    <style>
+        .userimage{height: 220px; width: 220px}
+        #image1, #image2{display: none}
+    </style>
+</head>
+<body>
+<input type="checkbox" id="profileBtn">
+<div id="profileSub">
+    <div >
+        <div class="row">
+            <div class="col-lg-8 mt-20 mb-20 ml-20 mr-20">
+                <div class="col-md-12 form-group">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <div style="font-weight: bold">프로필의 점수는 82점 입니다.</div>
+                                <div style="font-weight: bold">정보를 등록하시겠습니까?</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="235px">
+                                <span onclick="Profile()" class="button rounded-0 primary-bg text-white 100 btn_1 boxed-btn" style="width: 100%">
+                                    예
+                                </span>
+                            </td>
+                            <td width="235px">
+                                <label class="label" for="profileBtn" style="width: 100%; padding-top: 7px">
+                                    <span class="button rounded-0 primary-bg text-white 100 btn_1 boxed-btn" style="width: 100%">
+                                        아니요
+                                    </span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="checkbox" id="menuBtn">
+<div class="new-menu">
+    <label for="menuBtn" class="labelBtn lable" onclick="">
+        <img class="closed" src="img/temp/close.png" alt="">
+    </label>
+    <div id="new-menu-bar">
+        <ul id="navigation">
+            <li th:if='${id == null}'><a href="login">로그인</a></li>
+            <li th:if='${id == null}'><a href="join">회원가입</a></li>
+            <li th:if='${id != null}'><a href="member-list">회원보기</a></li>
+            <li th:if='${id != null}'><a href="AI-manager-1">AI 매니저</a></li>
+            <li th:if='${id != null}'><a href="messageHead">메시지</a></li>
+            <li th:if='${id != null}'><a href="markList">찜목록</a></li>
+            <li th:if='${id != null}'><a href="myProfile">내프로필</a></li>
+            <li th:if='${id != null}'><a href="logout">로그아웃</a></li>
+        </ul>
+    </div>
+</div>
+<!--? Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/logo/logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+<header>
+    <!-- Header Start -->
+    <div class="header-area" style="width: 100%">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="menu-wrapper">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index"><img src="assets/img/logo/logo.png" alt=""></a>
+                    </div>
+                    <label for="menuBtn" class="labelBtn" onclick="">
+                        <img class="menu_btn" src="img/temp/menu.png" alt="">
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </div>
+</header>
+    <main>
+        <!--================ Profile-02 Start =================-->
+        <section class="blog_area section_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mb-5 mb-lg-0">
+                        <!-- Title -->
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="section-tittle mb-70 text-center">
+                                    <h2>자기소개</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Profile 03 -->
+                            <form action="updateProfile3" name="subProfile" method="post" enctype="multipart/form-data">
+                                <div class="mt-10">
+                                    <!-- 자기소개 -->
+                                    <div class="col-md-12 form-group">
+                                        <h5>자기소개글 작성</h5>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <div class="mb-20">
+                                            <ul class="intro-keyword display-flex mb-5px b-b-p-100">
+                                                <li class="style padding-5-10 w-50px bgc-pink-100 text-center"><span>스타일</span></li>
+                                                <li class="padding-5-10"><span th:text="${profile.style}"></span></li>
+                                            </ul>
+                                            <ul class="intro-keyword display-flex mb-5px b-b-p-75">
+                                                <li class="style padding-5-10 w-50px bgc-pink-75 text-center">성향 </li>
+                                                <li class="padding-5-10"><span th:text="${profile.chars}"></span></li>
+                                            </ul>
+                                            <ul class="intro-keyword display-flex mb-5px b-b-p-50" >
+                                                <li class="style padding-5-10 w-50px bgc-pink-50 text-center">취미</li>
+                                                <li class="padding-5-10 w-10"><span th:text="${profile.hobby}"></span></li>
+                                            </ul>
+                                            <ul class="intro-keyword display-flex mb-5px b-b-p-25">
+                                                <li class="style padding-5-10 w-50px bgc-pink-25 text-center">음식</li>
+                                                <li class="padding-5-10"><span th:text="${profile.favorFood}"></span></li>
+                                            </ul>
+                                        </div>
+                                        <textarea id="textarea" class="single-textarea" name="introduce" placeholder="자기소개를 입력하세요" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required=""></textarea>
+                                    </div>
+                                    <!-- 사진 올리기 -->
+                                    <div class="col-md-12 form-group mt-40">
+                                        <h5>프로필 사진 등록</h5>
+                                    </div>
+                                    <div class="photo col-md-12 form-group input-flex mb-50">
+                                        <input id="image1" type="file" name=img1 accept="image/*" onchange="setThumbnail1(event);">
+                                        <label for="image1">
+                                            <div id="image_container1"><img class="userimage" th:src="@{|/img/user/${id}/1.png|}" onerror="this.src='/img/temp/user.png'"></div>
+                                        </label>
+                                        <input id="image2" type="file" name=img2 accept="image/*" onchange="setThumbnail2(event);">
+                                        <label for="image2">
+                                            <div id="image_container2"><img class="userimage" th:src="@{|/img/user/${id}/2.png|}" onerror="this.src='/img/temp/user.png'"></div>
+                                        </label>
+                                    </div>
+                                    <!-- 등록버튼 -->
+                                    <div class="col-md-12 form-group">
+                                        <label for="profileBtn" class="label">
+                                            <div type="button" class="btn_3" align="center">
+                                                자기소개 등록
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+    </main>
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <!-- Footer bottom -->
+                <div class="row align-items-center">
+                    <div class="col-xl-7 col-lg-8 col-md-7">
+                        <div class="footer-copy-right">
+                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Marry Me</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                  
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-4 col-md-5">
+                        <div class="footer-copy-right f-right">
+                            <!-- social -->
+                            <div class="footer-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-behance"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+    <!--? Search model Begin -->
+    <div class="search-model-box">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-btn">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Searching key.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+    <!-- JS here -->
+
+    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./assets/js/popper.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="./assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="./assets/js/owl.carousel.min.js"></script>
+    <script src="./assets/js/slick.min.js"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="./assets/js/wow.min.js"></script>
+    <script src="./assets/js/animated.headline.js"></script>
+    
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.sticky.js"></script>
+    <script src="./assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- contact js -->
+    <script src="./assets/js/contact.js"></script>
+    <script src="./assets/js/jquery.form.js"></script>
+    <script src="./assets/js/jquery.validate.min.js"></script>
+    <script src="./assets/js/mail-script.js"></script>
+    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="./assets/js/plugins.js"></script>
+    <script src="./assets/js/main.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    function setThumbnail1(event) {
+        var reader = new FileReader(); reader.onload = function(event) {
+            document.querySelector("div#image_container1").innerHTML=null;
+            var img1 = document.createElement("img");
+            img1.setAttribute("src", event.target.result);
+            img1.setAttribute("class", "userimage");
+            document.querySelector("div#image_container1").appendChild(img1);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    function setThumbnail2() {
+        var reader = new FileReader(); reader.onload = function(event) {
+            document.querySelector("div#image_container2").innerHTML=null;
+            var img2 = document.createElement("img");
+            img2.setAttribute("src", event.target.result);
+            img2.setAttribute("class", "userimage");
+            document.querySelector("div#image_container2").appendChild(img2);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    /*<![CDATA[*/
+    var id = '[[${id}]]';
+    var address = '[[${profile.address}]]';
+    var birth = '[[${profile2.birth}]]';
+    var job = '[[${profile.job}]]';
+    var salary = '[[${profile.salary}]]';
+    var height = '[[${profile.height}]]';
+    var weight = '[[${profile.weight}]]';
+    var blood = '[[${profile.blood}]]';
+    var religion = '[[${profile.religion}]]';
+    var education = '[[${profile.education}]]';
+    var property = '[[${profile.property}]]';
+    var parents = '[[${profile.parents}]]';
+    var smoke = '[[${profile.smoke}]]';
+    var drink = '[[${profile.drink}]]';
+    var marry_state = '[[${profile.marryState}]]';
+    /*]]>*/
+    var salaryLlist = ["2천만원 미만", "2천만원대", "3천만원대", "4천만원대", "5천만원대", "6천만원대", "7천만원대", "8천만원대", "9천만원대", "1억~3억 미만", "3억~5억 미만", "5억 이상"];
+    var eduList = ["초,중졸", "고졸", "대학(2,3년)졸", "대학(4년)졸", "대학원졸", "기타"];
+    var propertyList = ["3천 미만", "3천~7천 미만", "7천~1억 미만", "1억~3억 미만", "3억~5억 미만", "5억~10억 미만", "10억~20억 미만", "20억~30억 미만", "30억~50억 미만", "50억 이상"];
+    if (smoke == '경험 없음'||smoke == '금연') {
+        smoke = "N";
+    } else {
+        smoke = 'Y';
+    }
+    if (drink == '음주 안함') {
+        drink = "N";
+    } else {
+        drink = 'Y';
+    }
+    if (marry_state == '초혼') {
+        marry_state = "N";
+    } else {
+        marry_state = 'Y';
+    }
+    function profileCheck(){
+        var introduce = document.getElementById("textarea").value;
+        console.log(introduce);
+        $.ajax({
+            url:"http://localhost:9000/scoreout",
+            type:"POST",
+            data:{
+                address:address,
+                year:birth.substring(0,4),
+                month:birth.substring(4,6),
+                job:job,
+                salary:salaryLlist[salary - 1],
+                height:height,
+                weight:weight,
+                blood:blood,
+                religion:religion,
+                education:eduList[education-1],
+                property:(propertyList[property-1]),
+                parents:parents,
+                smoke:smoke,
+                drink:drink,
+                marry_state:marry_state,
+                introduce:introduce
+            },
+            success:function(res){
+                console.log(res);
+                if (confirm("프로필의 점수는 "+res+"점 입니다.\n정보를 등록하시겠습니까?") == true){
+                    document.subProfile.submit();
+                }else{
+                    return false;
+                }
+            },
+            error:function(){
+                if (confirm("프로필의 점수는 78점 입니다.\n정보를 등록하시겠습니까? 실패") == true){
+                    document.subProfile.submit();
+                }else{
+                    return false;
+                }
+            }
+        })
+    }
+    function Profile(){
+        document.subProfile.submit();
+    }
+</script>
+
+</body>
+</html>

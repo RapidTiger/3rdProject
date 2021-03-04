@@ -1,28 +1,174 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smart.project.proc.Test" >
-    <select id="sqlMenu2" resultType="com.smart.project.common.vo.MenuVO" parameterType="java.lang.Integer">
-        SELECT a.menu_no, a.parent_no, b.menu_nm, a.ord_no, b.use_yn, trim(b.link_url) as link_url, a.depth_no
-        FROM i_hr.adm_usr_menu a, i_hr.adm_menu b
-        WHERE a.emp_no=#{memNo} AND a.menu_no=b.menu_no AND b.use_yn='y'
+
+    <select id="idSelect" resultType="com.smart.project.web.home.vo.MemberVO" parameterType="java.lang.String">
+        SELECT * FROM members WHERE id = #{id}
     </select>
 
-    <select id="sqlMenu3" resultType="com.smart.project.web.home.vo.DeptVO" parameterType="java.lang.Integer">
-        SELECT * FROM DEPT
-        WHERE DEPTNO = #{deptNo}
+    <select id="joinProgram" resultType="java.lang.String" parameterType="com.smart.project.web.home.vo.MemberVO">
+        INSERT INTO members VALUES(#{id}, #{pw}, #{name}, #{birth}, #{gender}, #{tel})
     </select>
 
-    <select id="sqlMenu4" resultType="com.smart.project.web.home.vo.DeptVO" parameterType="com.smart.project.web.home.vo.SchVO">
-        SELECT * FROM DEPT
-        WHERE DEPTNO = #{DEPTNO}
+    <select id="loginProgram" resultType="java.lang.String" parameterType="java.lang.String">
+        select name from MEMBERS where id = #{id} and pw = #{pw}
     </select>
 
-    <select id="membersAll" resultType="com.smart.project.web.home.vo.MembersVO">
-        select * from MEMBERS
+    <select id="joinProfile" resultType="java.lang.String" parameterType="java.lang.String">
+        INSERT INTO member_profile (id) VALUES (#{id})
     </select>
 
-    <select id="board" resultType="com.smart.project.web.home.vo.MembersVO">
-        select * from NOTICEBOARD_HEAD
+    <select id="memberProfile_1" resultType="java.lang.String" parameterType="com.smart.project.web.home.vo.MemberProfileVO">
+        UPDATE member_profile set
+                                 nickname = #{nickname}, address = #{address}, marry_state = #{marryState},
+                                 blood = #{blood}, education = #{education}, job = #{job},
+                                 salary = #{salary}, property = #{property}, car = #{car},
+                                 height = #{height}, weight = #{weight}, parents = #{parents},
+                                 brother = #{brother}, sister = #{sister}, religion = #{religion}
+        WHERE id = #{id}
     </select>
 
+    <select id="memberProfile_2" resultType="java.lang.String" parameterType="com.smart.project.web.home.vo.MemberProfileVO">
+        UPDATE member_profile set
+                                  style = #{style}, chars = #{chars}, hobby = #{hobby}, drink = #{drink}, partenaire_religion = #{partenaireReligion},
+                                  smoke = #{smoke}, favor_food = #{favorFood}, my_score = #{myScore}, plan = #{plan}, child_birth = #{childBirth}
+        WHERE id = #{id}
+    </select>
+
+    <select id="memberProfile_3" resultType="java.lang.String" parameterType="com.smart.project.web.home.vo.MemberProfileVO">
+        UPDATE member_profile set introduce=#{introduce} WHERE id = #{id}
+    </select>
+
+    <select id="profileSelect" resultType="com.smart.project.web.home.vo.MemberProfileVO" parameterType="com.smart.project.web.home.vo.ProfileListVO">
+        SELECT * FROM member_profile WHERE id = #{id}
+    </select>
+
+
+    <select id="profileInsert" resultType="java.lang.String" parameterType="com.smart.project.web.home.vo.ProfileListVO">
+        INSERT INTO profile_list VALUES
+        (profile_num.nextval,#{id},#{gender},#{birth},#{introduce},#{nickname},#{address},
+         #{marryState},#{blood},#{religion},#{education},#{job},#{salary},#{property},
+         #{car},#{height},#{weight},#{style},#{chars},#{hobby},#{favorFood},#{drink},#{smoke},
+         #{parents},#{brother},#{sister},#{myScore},#{plan},#{childBirth})
+    </select>
+
+    <select id="profileDelete" resultType="java.lang.String" parameterType="com.smart.project.web.home.vo.ProfileListVO">
+        DELETE FROM profile_list WHERE id = #{id}
+    </select>
+
+    <select id="profileListSelect" resultType="com.smart.project.web.home.vo.ProfileListVO" parameterType="com.smart.project.web.home.vo.ProfileListVO">
+        SELECT * FROM (SELECT * FROM profile_list order by num desc) WHERE ROWNUM <![CDATA[<]]> 10
+    </select>
+
+    <select id="profileListSelectCtg" resultType="com.smart.project.web.home.vo.ProfileListVO" parameterType="com.smart.project.web.home.vo.ProfileListVO">
+        SELECT * FROM (
+            SELECT * FROM profile_list WHERE 1=1
+            <if test="gender != ''">
+                and gender = #{gender}
+            </if>
+            <if test="birth != ''">
+                and birth between #{birth} and #{birth}+9
+            </if>
+            <if test="marryState != ''">
+                and marry_state = #{marryState}
+            </if>
+            <if test="address != ''">
+                and address = #{address}
+            </if>
+            <if test="blood != ''">
+                and blood = #{blood}
+            </if>
+            <if test="religion != ''">
+                and religion = #{religion}
+            </if>
+            <if test="education != ''">
+                and education = #{education}
+            </if>
+            <if test="salary != ''">
+                and salary = #{salary}
+            </if>
+            order by num desc
+            ) WHERE ROWNUM <![CDATA[<]]> 10
+    </select>
+
+    <select id="profileUserSelect" resultType="com.smart.project.web.home.vo.ProfileListVO" parameterType="java.lang.String">
+        SELECT * FROM profile_list WHERE id = #{user}
+    </select>
+
+    <select id="profileListSelectMore" resultType="com.smart.project.web.home.vo.ProfileListVO" parameterType="java.lang.Integer">
+        select * from (SELECT num,id,nickname,marry_state,gender,birth,address,chars,introduce,rownum rownums FROM (SELECT * FROM profile_list WHERE num <![CDATA[<=]]> #{start} order by num desc)) WHERE rownums between #{more}*10 and #{more}*10+9
+    </select>
+
+    <select id="profileListSelectCtgMore" resultType="com.smart.project.web.home.vo.ProfileListVO" parameterType="java.lang.Integer">
+        select * from (SELECT num,id,nickname,marry_state,gender,birth,address,chars,introduce,rownum rownums FROM (SELECT * FROM profile_list WHERE num <![CDATA[<=]]> #{start}
+        <if test="gender != ''">
+            and gender = #{gender}
+        </if>
+        <if test="birth != ''">
+            and birth between #{birth} and #{birth}+9
+        </if>
+        <if test="marryState != ''">
+            and marry_state = #{marryState}
+        </if>
+        <if test="address != ''">
+            and address = #{address}
+        </if>
+        <if test="blood != ''">
+            and blood = #{blood}
+        </if>
+        <if test="religion != ''">
+            and religion = #{religion}
+        </if>
+        <if test="education != ''">
+            and education = #{education}
+        </if>
+        <if test="salary != ''">
+            and salary = #{salary}
+        </if>
+        order by num desc)) WHERE rownums between #{more}*10 and #{more}*10+9
+    </select>
+
+    <select id="messageHead" resultType="com.smart.project.web.home.vo.MessageHeadVO" parameterType="java.lang.String">
+        select * from Message_content where num in (select max(num) from(
+        select received friend, num from Message_content where num in (select max(num) from Message_content where send = #{id} group by send, received)
+        union
+        select send friend, num from Message_content where num in (select max(num) from Message_content where received = #{id} group by send, received)) group by friend)
+        order by num desc
+    </select>
+
+    <select id="messageContents" resultType="com.smart.project.web.home.vo.MessageHeadVO" parameterType="java.lang.String">
+        select * from Message_content where (send = #{id} and received = #{friend}) or (send = #{friend} and received = #{id}) order by num
+    </select>
+
+    <select id="messageRead" resultType="java.lang.String" parameterType="java.lang.String">
+        UPDATE Message_content SET check_message = ' ' WHERE received = #{id} and send = #{friend}
+    </select>
+
+    <select id="messageInsert" resultType="java.lang.String" parameterType="java.lang.String">
+        INSERT INTO Message_content VALUES(message_num.nextval, #{send}, #{received}, #{content}, sysdate, 'new')
+    </select>
+
+    <select id="messageCheck" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT check_message FROM (SELECT check_message FROM Message_content WHERE check_message = 'new' AND received = #{id}) WHERE rownum = 1
+    </select>
+
+    <select id="markCheck" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT * FROM mark WHERE id = #{id} AND mark = #{mark}
+    </select>
+
+    <select id="markInsert" resultType="java.lang.String" parameterType="java.lang.String">
+        INSERT INTO mark VALUES(mark_num.nextval, #{id}, #{mark}, #{idName}, #{markName})
+    </select>
+
+    <select id="markDelete" resultType="java.lang.String" parameterType="java.lang.String">
+        DELETE FROM mark WHERE id = #{id} and mark = #{mark}
+    </select>
+
+    <select id="markList" resultType="com.smart.project.web.home.vo.MarkVO" parameterType="java.lang.String">
+        SELECT * FROM mark WHERE id = #{id} ORDER BY num DESC
+    </select>
+
+    <select id="markMeList" resultType="com.smart.project.web.home.vo.MarkVO" parameterType="java.lang.String">
+        SELECT * FROM mark WHERE mark = #{id} ORDER BY num DESC
+    </select>
 </mapper>
